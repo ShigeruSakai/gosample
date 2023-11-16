@@ -1,0 +1,36 @@
+pipeline:
+  name: GoSampleGitHubRepoBuildPipeline
+  identifier: GoSampleGitHubRepoBuildPipeline
+  projectIdentifier: gosample
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: GitHubGoSampleRepoConnector
+        build: <+input>
+  stages:
+    - stage:
+        name: GoSampleBuildStage
+        identifier: GoSampleBuildStage
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          platform:
+            os: MacOS
+            arch: Arm64
+          runtime:
+            type: Docker
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  identifier: build_go_app
+                  name: Build Go App
+                  spec:
+                    command: |-
+                      echo "Welcome to Harness CI"
+                      go build
+                      go test
