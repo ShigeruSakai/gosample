@@ -26,8 +26,11 @@ pipeline:
           execution:
             steps:
               - step:
-                  type: Action
-                  name: Action_1
-                  identifier: Action_1
+                  type: Run
+                  identifier: build_go_app
+                  name: Build Go App
                   spec:
-                    uses: ShigeruSakai
+                    command: |-
+                      echo "Welcome to Harness CI"
+                      go build
+                      go test
