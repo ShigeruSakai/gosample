@@ -17,12 +17,6 @@ pipeline:
         type: CI
         spec:
           cloneCodebase: true
-          platform:
-            os: MacOS
-            arch: Arm64
-          runtime:
-            type: Docker
-            spec: {}
           execution:
             steps:
               - step:
@@ -30,7 +24,18 @@ pipeline:
                   identifier: build_go_app
                   name: Build Go App
                   spec:
+                    connectorRef: account.harnessImage
+                    image: gosampleimage
+                    shell: Sh
                     command: |-
                       echo "Welcome to Harness CI"
                       go build
                       go test
+          infrastructure:
+            type: KubernetesDirect
+            spec:
+              connectorRef: test
+              namespace: default
+              automountServiceAccountToken: true
+              nodeSelector: {}
+              os: Linux
