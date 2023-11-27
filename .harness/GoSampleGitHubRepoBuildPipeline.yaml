@@ -24,7 +24,7 @@ pipeline:
                   identifier: build_go_app
                   name: Build Go App
                   spec:
-                    connectorRef: account.harnessImage
+                    connectorRef: DockerRegistryConnectorGosample
                     image: gosampleimage
                     shell: Sh
                     command: |-
