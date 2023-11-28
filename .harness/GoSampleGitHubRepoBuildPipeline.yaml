@@ -44,7 +44,7 @@ pipeline:
                     connectorRef: DockerRegistryConnectorGosample
                     repo: shigerusakai/dockerhub_repo_gosample
                     tags:
-                      - tag1.0
+                      - <+pipeline.sequenceId>
           infrastructure:
             type: KubernetesDirect
             spec:
