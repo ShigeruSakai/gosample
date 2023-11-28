@@ -25,12 +25,26 @@ pipeline:
                   name: Build Go App
                   spec:
                     connectorRef: DockerRegistryConnectorGosample
-                    image: shigerusakai/dockerhub_repo_gosample:tagname
+                    image: golang:1.15
                     shell: Sh
                     command: |-
                       echo "Welcome to Harness CI"
                       go build
                       go test
+                    reports:
+                      type: JUnit
+                      spec:
+                        paths:
+                          - "*.xml"
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: BuildAndPushDockerRegistry_1
+                  identifier: BuildAndPushDockerRegistry_1
+                  spec:
+                    connectorRef: DockerRegistryConnectorGosample
+                    repo: shigerusakai/dockerhub_repo_gosample
+                    tags:
+                      - tag1.0
           infrastructure:
             type: KubernetesDirect
             spec:
