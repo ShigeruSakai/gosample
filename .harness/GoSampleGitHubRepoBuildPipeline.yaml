@@ -25,7 +25,7 @@ pipeline:
                   name: Build Go App
                   spec:
                     connectorRef: DockerRegistryConnectorGosample
-                    image: shigerusakai/dockerhub_repo_gosample:1
+                    image: shigerusakai/dockerhub_repo_gosample:tagname
                     shell: Sh
                     command: |-
                       echo "Welcome to Harness CI"
